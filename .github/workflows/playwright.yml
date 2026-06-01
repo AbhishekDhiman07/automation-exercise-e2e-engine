@@ -28,8 +28,7 @@ jobs:
       run: npx playwright install --with-deps chromium
 
     - name: Execute Full End-to-End Pipeline
-      # ?? THE FIX: Passing the --headless flag forces the cloud runner to bypass the UI window requirement
-      run: npx playwright test tests/playwright/comprehensiveSuite.spec.ts --headless
+      run: npx playwright test tests/playwright/comprehensiveSuite.spec.ts
       env:
         BASE_URL: https://automationexercise.com
 
