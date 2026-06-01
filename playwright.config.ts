@@ -11,7 +11,7 @@ export default defineConfig({
     timeout: 5000
   },
 
-  // Dynamic cloud vs local toggle
+  // Dynamic cloud environment execution router
   headless: process.env.CI ? true : false,
 
   forbidOnly: !!process.env.CI,
@@ -24,17 +24,17 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'on',
     video: 'retain-on-failure',
-    launchOptions: {
-      args: ['--start-maximized']
-    }
   },
 
+  /* Configure target execution browser matrices */
   projects: [
     {
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: null 
+        // 💡 THE FIX: Explicitly enforce standard crisp HD viewport dimensions 
+        // to comply with internal device emulation rules on Linux systems
+        viewport: { width: 1280, height: 720 }
       },
     }
   ],
